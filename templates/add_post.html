@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Add New Post{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-xl-8">
+      <h2 class="mb-4 text-center fw-bold">Create a New Post</h2>
+
+      <form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data" class="shadow-sm p-4 rounded bg-light">
+        {% csrf_token %}
+
+        <div class="mb-4">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control form-control-lg" id="title" name="title" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="image" class="form-label">Upload Image</label>
+          <input type="file" class="form-control" id="image" name="image" accept="image/*" onchange="previewImage()">
+          <img id="imagePreview" class="img-fluid rounded mt-3 d-none" style="max-height: 300px;">
+        </div>
+
+        <div class="mb-4">
+          <label for="content" class="form-label">Content</label>
+          <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+        </div>
+
+        <div class="mb-4">
+          <label for="category" class="form-label">Category</label>
+          <select class="form-select" name="category" id="category" required>
+            <option value="">Select category</option>
+            {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label for="tags" class="form-label">Tags (hold Ctrl to select multiple)</label>
+          <select class="form-select" name="tags" id="tags" multiple>
+            {% for tag in tags %}
+              <option value="{{ tag.id }}">{{ tag.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-success btn-lg">Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor.create(document.querySelector('#content')).catch(error => console.error(error));
+
+  function previewImage() {
+    const input = document.getElementById('image');
+    const preview = document.getElementById('imagePreview');
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+        preview.classList.remove('d-none');
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+</script>
+{% endblock %}
