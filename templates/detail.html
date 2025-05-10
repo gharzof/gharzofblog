@@ -3,8 +3,8 @@
 
 {% block keywords %}{{ post.title }}{% endblock %}
 {% block ogtitle %}{{ post.title }}{% endblock %}
-{% block description %}{{ post.content|striptags|truncatechars:160 }}{% endblock %}
-{% block ogdescription %}{{ post.content|striptags|truncatechars:160 }}{% endblock %}
+{% block description %}{{ post.content|striptags|truncatechars:300 }}{% endblock %}
+{% block ogdescription %}{{ post.content|striptags|truncatechars:300 }}{% endblock %}
 {% block ogimage %}{{ post.image }}{% endblock %}
 
 
