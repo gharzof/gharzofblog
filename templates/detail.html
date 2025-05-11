@@ -24,7 +24,7 @@
       </p>
 
       {% if post.image %}
-        <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid rounded shadow-sm mb-4">
+        <img src="{{ post.image }}" alt="{{ post.title }}" class="img-fluid rounded shadow-sm mb-4" style="width: 100%">
       {% endif %}
 
       <div class="ck-content">
@@ -55,9 +55,9 @@
       <h4 class="mb-4">Related Posts</h4>
       {% for related in related_posts %}
         <div class="col-md-6 col-lg-4 mb-4">
-          <div class="card h-100 border-0 shadow-sm">
+          <div class="modern-card h-100">
             {% if related.image %}
-              <img src="{{ related.image }}" class="card-img-top" alt="{{ related.title }}">
+              <img src="{{ related.image }}" class="card-img-top rounded-top" alt="{{ related.title }}">
             {% endif %}
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ related.title|truncatechars:50 }}</h5>

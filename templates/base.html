@@ -19,71 +19,85 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="icon" href="{% static 'img/gharzof.png' %}" />
 
-  <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
+
+  <!-- Font Awesome & Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet" />
 
   <!-- Custom Theme CSS -->
-  <style>
-    :root[data-theme='light'] {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --nav-bg: #f8f9fa;
-      --footer-bg: #343a40;
-      --btn-theme: #000;
-      --btn-theme-bg: #e0e0e0;
-    }
+<style>
+  .modern-card {
+    background: linear-gradient(145deg, #f9f9f9, #ffffff); /* Yorug' rang */
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.25);
+    transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(0, 123, 255, 0.15);
+    overflow: hidden;
+    color: #212529; /* Default qora matn */
+  }
 
-    :root[data-theme='dark'] {
-      --bg-color: #121212;
-      --text-color: #f1f1f1;
-      --nav-bg: #1f1f1f;
-      --footer-bg: #000000;
-      --btn-theme: #ffffff;
-      --btn-theme-bg: #333333;
-    }
+  .modern-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.4);
+    border-color: rgba(0, 123, 255, 0.4);
+  }
 
-    body {
-      font-family: 'Fira Mono', monospace;
-      min-height: 100vh;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-    }
+  .modern-card .card-body {
+    background-color: transparent;
+    padding: 1rem;
+  }
 
-    nav.navbar {
-      background-color: var(--nav-bg) !important;
-      transition: background-color 0.3s;
-    }
+  .modern-card .card-title {
+    font-weight: 600;
+    color: #212529;
+  }
 
-    footer {
-      background-color: var(--footer-bg);
-      transition: background-color 0.3s;
-    }
+  .modern-card .text-muted {
+    color: #6c757d !important; /* Bootstrap muted rangi */
+  }
 
-    .theme-toggle-btn {
-      border: none;
-      background-color: var(--btn-theme-bg);
-      color: var(--btn-theme);
-      padding: 6px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+  .modern-card .btn {
+    font-weight: bold;
+    border-radius: 8px;
+    color: #007bff;
+    border: 1px solid #007bff;
+    background-color: transparent;
+  }
 
-    .theme-toggle-btn:hover {
-      opacity: 0.9;
-    }
+  .modern-card .btn:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
 
-    main {
-      flex: 1;
-    }
-  </style>
+  body {
+    background-color: #ffffff;
+    color: #212529;
+    font-family: 'Fira Mono', monospace;
+  }
+
+  nav.navbar {
+    background-color: #f8f9fa !important;
+  }
+
+  footer {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+
+  .theme-toggle-btn {
+    display: none; /* Chunki endi dark mode yo'q */
+  }
+
+  main {
+    flex: 1;
+  }
+</style>
+
 </head>
 <body>
   <!-- Navbar -->
@@ -106,11 +120,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://t.me/gharzof">Channel</a>
-          </li>
-          <li class="nav-item ms-3">
-            <button id="toggle-theme" class="theme-toggle-btn">
-              <i class="fas fa-moon me-1"></i> Dark Mode
-            </button>
           </li>
         </ul>
       </div>
@@ -143,32 +152,6 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const toggleBtn = document.getElementById('toggle-theme');
-    const htmlTag = document.documentElement;
-
-    // Avvalgi tema tanlovini olish
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      htmlTag.setAttribute('data-theme', savedTheme);
-      updateButton(savedTheme);
-    }
-
-    toggleBtn.addEventListener('click', () => {
-      const current = htmlTag.getAttribute('data-theme');
-      const newTheme = current === 'light' ? 'dark' : 'light';
-      htmlTag.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateButton(newTheme);
-    });
-
-    function updateButton(theme) {
-      if (theme === 'dark') {
-        toggleBtn.innerHTML = '<i class="fas fa-sun me-1"></i> Light Mode';
-      } else {
-        toggleBtn.innerHTML = '<i class="fas fa-moon me-1"></i> Dark Mode';
-      }
-    }
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </body>
 </html>
