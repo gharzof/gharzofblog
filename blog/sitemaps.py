@@ -13,7 +13,7 @@ class PostSitemap(Sitemap):
         return obj.created_at
 
     def location(self, obj):
-        return f"/post/{obj.slug}/"
+        return f"/detail/{obj.slug}/"
 
 class StaticViewSitemap(Sitemap):
     priority = 0.5
